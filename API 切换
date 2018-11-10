@@ -1,0 +1,55 @@
+https://www.bwgyhw.com/bandwagonhost-dc8-scripts/
+很多人发现搬瓦工在后台切换机房时，选择DC8机房会切换失败，提示Region is full. Please try again in a few hours. (734104).这个错误，很好理解，就是搬瓦工DC8机房满了，迁移至DC8机房失败。本文介绍下如何结合搬瓦工API系统自动迁移至DC8机房。
+
+相关文章：
+
+2018年搬瓦工机房迁移规则详解
+
+搬瓦工如何更换机房/更换IP
+
+搬瓦工更换机房过程过可能遇到的问题与解决方案
+
+搬瓦工迁移机房至DC8失败，错误代码734104
+
+搬瓦工API是什么？如何利用搬瓦工API管理搬瓦工VPS
+
+ 
+
+搬瓦工自动迁移DC8机房脚本
+连接搬瓦工VPS
+首先第一步是连接你的搬瓦工vps，这里参考教程：Windows/Mac/Linux如何SSH远程连接/登陆搬瓦工。
+
+下载脚本
+之后需要安装必须的依赖和脚本，如果查看搬瓦工vps的系统类型请参考：如何查看搬瓦工VPS的系统？如何更换搬瓦工系统版本？根据自己的系统执行下面的脚本：
+
+Ubuntu/Debian：
+
+
+apt install -y wget && wget --no-check-certificate https://raw.githubusercontent.com/flyzy2005/scripts/master/dc8.sh && chmod +x dc8.sh
+1
+apt install -y wget && wget --no-check-certificate https://raw.githubusercontent.com/flyzy2005/scripts/master/dc8.sh && chmod +x dc8.sh
+CentOS：
+
+
+yum -y install wget && wget --no-check-certificate https://raw.githubusercontent.com/flyzy2005/scripts/master/dc8.sh && chmod +x dc8.sh
+1
+yum -y install wget && wget --no-check-certificate https://raw.githubusercontent.com/flyzy2005/scripts/master/dc8.sh && chmod +x dc8.sh
+执行脚本
+执行脚本需要两个参数，一个是你的VEID，一个是你的API_KEY，关于这两个参数和作用和如何获取，可以参考之前的教程：搬瓦工API是什么？如何利用搬瓦工API管理搬瓦工VPS，拿到了这俩个参数后，就可以执行自动切换DC8机房脚本了（VEID在前，API_KEY在后）：
+
+
+./dc8.sh  11047 private_8ZtCU5LX2HiJsE1OX
+1
+./dc8.sh  11047 private_8ZtCU5LX2HiJsE1OX
+之后就可以得到如下的返回，Region is full. Please try again in a few hours.错误代码是734104：
+
+搬瓦工自动切换DC8机房
+
+后台开启脚本
+此时先按ctrl+c停止脚本，之后用nohup后台执行脚本（可以用ps -aux命令看在进程中有没有）：
+
+
+nohup ./dc8.sh &
+1
+nohup ./dc8.sh &
+这样就可以后台执行这个自动切换至DC8机房的脚本了，如果切换成功，那么你的搬瓦工VPS会重启，这个脚本就停止了。并且在成功切换机房后，搬瓦工会发邮件通知你，所以也不需要担心有没有迁移成功，只需要如此在后台执行脚本，之后就让脚本自己不停尝试转换机房就行。
