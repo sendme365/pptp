@@ -1,0 +1,55 @@
+https://www.bwgyhw.com/bandwagonhost-modified-bbr-speed-up/
+搬瓦工速度慢？搬瓦工打开网页卡怎么办？本文介绍下搬瓦工如何一键安装魔改版bbr加速，包括魔改版bbr加速以及暴力版魔改bbr加速（南浪琴版），利用魔改版bbr加速你的搬瓦工VPS。
+
+ 
+
+什么是魔改版bbr
+bbr加速相信大家都知道了（相关介绍：搬瓦工加速教程：搬瓦工一键开启bbr加速），简而言之就是出自谷歌员工之手的应用于 Linux 内核中的拥塞控制技术。而魔改版bbr加速是在bbr加速的基础上，修改了一些参数，让它更加”暴力“，也称为魔改版bbr加速。
+
+而至于bbr加速和魔改版bbr加速到底哪个好，个人更加倾向于普通版bbr，毕竟谷歌那么多工程师测出的参数，应该来说是值得信赖的。
+
+ 
+
+搬瓦工一键安装魔改版bbr
+一键安装魔改版bbr加速脚本注意点：
+
+一键安装魔改版bbr加速的脚本支持系统：Centos 6+/Debian 8+/Ubuntu 14+。
+本教程基于搬瓦工CentOS系统（刚购买搬瓦工默认的系统）。
+魔改版bbr加速也是基于内核的加速，因此只支持KVM内核架构的，所以搬瓦工OVZ方案无法开启魔改版bbr加速。
+下面正式开始教程如何在搬瓦工上一键安装魔改版bbr加速。
+
+1.安装wget
+
+搬瓦工修改后的系统默认是不带wget的，所以要首先安装wget：
+
+
+yum -y install wget
+1
+yum -y install wget
+2.一键安装魔改版bbr
+
+依次执行如下三行代码，下载一键安装脚本->赋予执行权限->执行脚本：
+
+
+wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"
+chmod +x tcp.sh
+./tcp.sh
+1
+2
+3
+wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"
+chmod +x tcp.sh
+./tcp.sh
+之后就会出现脚本的执行界面，直接输入你要操作的序号就可以执行相应的命令（输入错误请按抓Ctrl再按删除）：搬瓦工魔改版bbr
+
+注意：由于我用的是搬瓦工自带bbr加速的系统，所以这里显示我的bbr加速已经启动成功，所以我首先输入了7进行”卸载全部加速“。之后，可以再次执行./tcp.sh运行脚本，此时需要输入1，也就是安装BBR/BBR魔改版内核，虽然当前状态显示已安装bbr加速内核，但是似乎这个内核与魔改版bbr需要的内核并不兼容，我直接安装了魔改版bbr，都是显示BBR魔改版启动失败，所以需要先安装内核，安装完毕后会让你重启系统，直接输入y重启后重连即可。
+
+重连后，再次执行脚本，安装魔改版bbr加速，就可以看到你的搬瓦工已经开启魔改版bbr成功了：
+
+搬瓦工魔改版bbr安装成功
+
+ 
+
+搬瓦工魔改版bbr加速的效果
+魔改版bbr加速是在bbr加速的基础上，修改了一些参数，让它更加”暴力“，而这个一键脚本支持两种魔改版bbr加速，一个是4也就是bbr魔改版加速，另一个是暴力bbr魔改版加速，后者是南浪琴版的魔改版bbr，至于两者哪个好，大家可以都测试一下！
+
